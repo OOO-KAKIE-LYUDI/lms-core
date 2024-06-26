@@ -3,10 +3,22 @@ CREATE SCHEMA IF NOT EXISTS lms;
 CREATE TABLE lms.category
 (
     category_id BIGSERIAL PRIMARY KEY,
-    name        TEXT NOT NULL,
-    created     TIMESTAMP,
+    name        TEXT      NOT NULL,
+    created     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated     TIMESTAMP
 );
+
+CREATE TABLE lms.course
+(
+    course_id   SERIAL PRIMARY KEY,
+    category_id BIGINT REFERENCES category (category_id) ON DELETE CASCADE,
+    creator_id  INTEGER      NOT NULL,
+    name        VARCHAR(255) NOT NULL,
+    description TEXT,
+    created     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated     TIMESTAMP
+);
+
 
 --
 -- CREATE TABLE dormentor.dorm
@@ -53,5 +65,3 @@ CREATE TABLE lms.category
 --     created    TIMESTAMP,
 --     updated    TIMESTAMP
 -- );
-
--- TODO: check, may be update this ddls and create ddl for facility)

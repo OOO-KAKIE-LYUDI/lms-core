@@ -5,8 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="init-ddl" author="alexbossov">
-        <sqlFile path="sql/user-init-ddl.sql" dbms="postgresql" relativeToChangelogFile="true"/>
-    </changeSet>
+    <include file="2024-06-25-user-init-ddl.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
