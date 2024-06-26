@@ -1,6 +1,7 @@
 package com.lms.auth.service.impl;
 
 import com.lms.auth.exception.LmsAuthConflictException;
+import com.lms.auth.exception.LmsAuthUnauthorizedException;
 import com.lms.auth.model.dto.UserDto;
 import com.lms.auth.model.entity.UserEntity;
 import com.lms.auth.model.mapper.UserMapper;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -31,8 +33,12 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public String login(String email) {
+    public String login(String email, String password) {
         UserDetails user = loadUserByUsername(email);
+        if (!Objects.equals(passwordEncoder.encode(password), password)) {
+            throw new LmsAuthUnauthorizedException("Адрес электронной почты или пароль введены неверно. Попробуйте еще раз!");
+        }
+
         return jwtUtils.generateToken(user);
     }
 

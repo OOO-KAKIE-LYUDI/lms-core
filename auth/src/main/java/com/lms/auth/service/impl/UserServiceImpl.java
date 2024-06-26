@@ -21,4 +21,10 @@ public class UserServiceImpl implements UserService {
         var userEntity = userRepository.findById(userId).orElseThrow();
         return userMapper.createGetUserDto(userEntity);
     }
+
+    @Override
+    public UserDto getUserByEmail(String email) {
+        var userEntity = userRepository.findUserByEmail(email).orElseThrow();
+        return userMapper.createGetUserDto(userEntity);
+    }
 }
