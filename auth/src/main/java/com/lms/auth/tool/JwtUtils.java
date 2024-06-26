@@ -36,7 +36,7 @@ public class JwtUtils {
     }
 
     private <T> T extractClaim(String jwt, Function<Claims, T> claimsResolver) {
-        Claims claims = extractAllClaims(jwt);
+        var claims = extractAllClaims(jwt);
         return claimsResolver.apply(claims);
     }
 
@@ -52,12 +52,12 @@ public class JwtUtils {
         return createToken(userDetails, claims);
     }
 
-    public String generateToken(UserDetails userDetails, Map<String, Object> claims) {
+    private String generateToken(UserDetails userDetails, Map<String, Object> claims) {
         return createToken(userDetails, claims);
     }
 
     private String createToken(UserDetails userDetails, Map<String, Object> claims) {
-        Date now = Date.from(Instant.now());
+        var now = Date.from(Instant.now());
         return Jwts.builder().setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .claim("authorities", userDetails.getAuthorities())

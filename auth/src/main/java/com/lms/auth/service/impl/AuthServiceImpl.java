@@ -1,5 +1,6 @@
 package com.lms.auth.service.impl;
 
+import com.lms.auth.exception.LmsAuthConflictException;
 import com.lms.auth.model.dto.UserDto;
 import com.lms.auth.model.entity.UserEntity;
 import com.lms.auth.model.mapper.UserMapper;
@@ -30,18 +31,26 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public String login(String username) {
-        return null;
+    public String login(String email) {
+        UserDetails user = loadUserByUsername(email);
+        return jwtUtils.generateToken(user);
     }
 
     @Override
-    public UserEntity register(UserDto userDto, String username, String password) {
-        return null;
+    public UserDto register(UserDto userDto, String email, String password) {
+        if (userRepository.findUserByEmail(email).isPresent()) {
+            throw new LmsAuthConflictException("Пользователь с почтовым адресом %s уже зарегистрирован в системе!".formatted(email));
+        }
+
+        var userEntity = userMapper.createUser(userDto, email, password);
+        userEntity.setPassword(passwordEncoder.encode(password));
+
+        return userMapper.createGetUserDto(userEntity);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findUserByEmail(email);
+        var user = userRepository.findUserByEmail(email).orElseThrow();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
         return new User(user.getEmail(), user.getPassword(), authorities);
