@@ -8,14 +8,25 @@ CREATE TABLE lms.category
     updated     TIMESTAMP
 );
 
+CREATE TABLE lms."user"
+(
+    user_id  BIGSERIAL PRIMARY KEY,
+    name     VARCHAR   NOT NULL,
+    email    VARCHAR   NOT NULL,
+    password VARCHAR   NOT NULL,
+    role     VARCHAR   NOT NULL,
+    created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated  TIMESTAMP
+);
+
 CREATE TABLE lms.course
 (
     course_id   SERIAL PRIMARY KEY,
     category_id BIGINT REFERENCES category (category_id) ON DELETE CASCADE,
-    creator_id  INTEGER      NOT NULL,
-    name        VARCHAR(255) NOT NULL,
+    creator_id  BIGINT REFERENCES "user" (user_id) ON DELETE CASCADE,
+    name        VARCHAR   NOT NULL,
     description TEXT,
-    created     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated     TIMESTAMP
 );
 
