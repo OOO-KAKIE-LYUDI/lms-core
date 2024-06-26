@@ -1,6 +1,5 @@
 package com.lms.core.handler;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.lms.core.exception.LmsBadGatewayException;
 import com.lms.core.exception.LmsConflictException;
 import com.lms.core.exception.LmsException;
@@ -44,8 +43,7 @@ public class ErrorResponseHandler {
         } else if (ex instanceof MethodArgumentNotValidException ||
                 ex instanceof MethodArgumentTypeMismatchException ||
                 ex instanceof MissingRequestValueException ||
-                ex instanceof ValidationException ||
-                ex.getCause() instanceof MismatchedInputException) {
+                ex instanceof ValidationException) {
             e = new LmsValidationException(ex);
         } else {
             e = new LmsInternalException(ex);

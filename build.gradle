@@ -2,7 +2,12 @@ plugins {
     id 'org.springframework.boot' version '3.0.4'
     id 'io.spring.dependency-management' version '1.0.13.RELEASE'
     id 'java'
-    id 'io.freefair.lombok' version '6.5.1'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 }
 
 subprojects {
@@ -12,10 +17,6 @@ subprojects {
 
     sourceCompatibility = '17'
     targetCompatibility = '17'
-
-    repositories {
-        mavenCentral()
-    }
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'

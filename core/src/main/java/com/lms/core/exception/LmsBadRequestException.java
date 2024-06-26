@@ -1,4 +1,4 @@
-package com.lms.exception;
+package com.lms.core.exception;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
