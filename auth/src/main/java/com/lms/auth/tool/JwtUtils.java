@@ -22,10 +22,10 @@ public class JwtUtils {
     private Long expiry = 60 * 60 * 1000L;
 
     @Value("${jwt.public.key}")
-    private RSAPublicKey rsaPublicKey = null;
+    private RSAPublicKey rsaPublicKey;
 
     @Value("${jwt.private.key}")
-    private RSAPrivateKey rsaPrivateKey = null;
+    private RSAPrivateKey rsaPrivateKey;
 
     public String extractUsername(String jwt) {
         return extractClaim(jwt, Claims::getSubject);
@@ -68,8 +68,7 @@ public class JwtUtils {
     }
 
     public Boolean isTokenValid(String jwt, UserDetails userDetails) {
-        val username = extractUsername(jwt);
-        return Objects.equals(username, userDetails.getUsername()) && !isTokenExpired(jwt);
+        return Objects.equals(extractUsername(jwt), userDetails.getUsername()) && !isTokenExpired(jwt);
     }
 
     private Boolean isTokenExpired(String jwt) {

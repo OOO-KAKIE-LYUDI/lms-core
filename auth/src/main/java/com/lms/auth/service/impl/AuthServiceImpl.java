@@ -6,6 +6,8 @@ import com.lms.auth.model.mapper.UserMapper;
 import com.lms.auth.repository.UserRepository;
 import com.lms.auth.service.AuthService;
 import com.lms.auth.tool.JwtUtils;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +19,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService, UserDetailsService {
 
     private UserRepository userRepository;

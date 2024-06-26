@@ -6,7 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="init-ddl" author="alexbossov">
-        <sqlFile path="sql/user-init-ddl.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+        <sqlFile path="sql/init-ddl.sql" dbms="postgresql" relativeToChangelogFile="true"/>
     </changeSet>
 
 </databaseChangeLog>

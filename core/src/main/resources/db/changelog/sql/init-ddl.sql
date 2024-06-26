@@ -22,8 +22,8 @@ CREATE TABLE lms."user"
 CREATE TABLE lms.course
 (
     course_id   SERIAL PRIMARY KEY,
-    category_id BIGINT REFERENCES category (category_id) ON DELETE CASCADE,
-    creator_id  BIGINT REFERENCES "user" (user_id) ON DELETE CASCADE,
+    category_id BIGINT REFERENCES lms.category (category_id) ON DELETE CASCADE,
+    creator_id  BIGINT REFERENCES lms."user" (user_id) ON DELETE CASCADE,
     name        VARCHAR   NOT NULL,
     description TEXT,
     created     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
