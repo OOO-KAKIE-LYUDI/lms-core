@@ -35,7 +35,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMINISTRATOR')")
+//    @PreAuthorize("hasRole('ADMINISTRATOR')")
     CategoryDto findById(@PathVariable @NotNull Long id) {
         return categoryService.findCategoryById(id);
     }
