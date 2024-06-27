@@ -12,9 +12,9 @@ public interface CategoryMapper {
 
     CategoryDto toDto(CategoryEntity categoryEntity);
 
-    @Mappings(value = {
-            @Mapping(target = "name", source = "name")
-    })
+//    @Mappings(value = {
+//            @Mapping(target = "name", source = "name")
+//    })
     CategoryEntity toEntity(CategoryRequest source);
 }
 

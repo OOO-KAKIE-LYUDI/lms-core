@@ -1,3 +1,3 @@
 rootProject.name = 'lms'
 
-include 'auth', 'core'
+include 'auth', 'core', 'file'

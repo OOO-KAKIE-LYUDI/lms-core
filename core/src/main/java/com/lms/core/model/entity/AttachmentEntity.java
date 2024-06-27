@@ -44,8 +44,11 @@ public class AttachmentEntity {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "file_id")
+    @Column(name = "file_id", updatable = false, insertable = false)
     private Long fileId;
+    @ManyToOne
+    @JoinColumn(name = "file_id", referencedColumnName = "file_id")
+    private FileEntity file;
 
     @Column(name = "position")
     private Integer position;

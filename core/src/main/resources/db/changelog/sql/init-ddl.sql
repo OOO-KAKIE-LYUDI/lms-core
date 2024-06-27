@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS lms;
 
-CREATE TABLE lms.category
+CREATE TABLE IF NOT EXISTS lms.category
 (
     category_id BIGSERIAL PRIMARY KEY,
     name        TEXT      NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE lms.category
     updated     TIMESTAMP
 );
 
-CREATE TABLE lms."user"
+CREATE TABLE IF NOT EXISTS lms."user"
 (
     user_id  BIGSERIAL PRIMARY KEY,
     name     VARCHAR   NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE lms."user"
     updated  TIMESTAMP
 );
 
-CREATE TABLE lms.course
+CREATE TABLE IF NOT EXISTS lms.course
 (
     course_id   SERIAL PRIMARY KEY,
     category_id BIGINT REFERENCES lms.category (category_id) ON DELETE CASCADE,
@@ -30,7 +30,7 @@ CREATE TABLE lms.course
     updated     TIMESTAMP
 );
 
-CREATE TABLE lms.enrollment
+CREATE TABLE IF NOT EXISTS lms.enrollment
 (
     enrollment_id BIGSERIAL PRIMARY KEY,
     user_id       BIGINT    NOT NULL REFERENCES lms.user (user_id) ON DELETE CASCADE,
@@ -38,7 +38,7 @@ CREATE TABLE lms.enrollment
     created       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE lms.chapter
+CREATE TABLE IF NOT EXISTS lms.chapter
 (
     chapter_id  BIGSERIAL PRIMARY KEY,
     course_id   BIGINT    NOT NULL REFERENCES lms.course (course_id) ON DELETE CASCADE,
@@ -50,7 +50,7 @@ CREATE TABLE lms.chapter
     updated     TIMESTAMP
 );
 
-CREATE TABLE lms.attachment
+CREATE TABLE IF NOT EXISTS lms.attachment
 (
     attachment_id BIGSERIAL PRIMARY KEY,
     chapter_id    BIGINT    NOT NULL REFERENCES lms.chapter (chapter_id) ON DELETE CASCADE,
@@ -60,4 +60,12 @@ CREATE TABLE lms.attachment
     created       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated       TIMESTAMP,
     position      INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS lms.file
+(
+    file_id        BIGSERIAL PRIMARY KEY,
+    orig_name VARCHAR NOT NULL,
+    file_name VARCHAR NOT NULL,
+    bucket    VARCHAR NOT NULL
 );
