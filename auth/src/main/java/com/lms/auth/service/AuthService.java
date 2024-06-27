@@ -4,6 +4,6 @@ import com.lms.auth.model.dto.UserDto;
 import com.lms.auth.model.entity.UserEntity;
 
 public interface AuthService {
-    String login(String username);
-    UserEntity register(UserDto userDto, String username, String password);
+    String login(String email, String password);
+    UserDto register(UserDto userDto, String email, String password);
 }

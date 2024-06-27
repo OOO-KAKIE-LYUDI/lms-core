@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    UserEntity createUser(UserDto userDto, String username, String password);
+    UserEntity createUser(UserDto userDto, String email, String password);
 
     UserDto createGetUserDto(UserEntity user);
 }
