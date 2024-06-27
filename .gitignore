@@ -42,3 +42,4 @@ allure-results
 
 ### gradle ###
 core/.gradle
+.gradle
