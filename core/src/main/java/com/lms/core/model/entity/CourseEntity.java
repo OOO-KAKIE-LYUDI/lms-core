@@ -45,6 +45,12 @@ public class CourseEntity {
     @JoinColumn(name = "creator_id", referencedColumnName = "user_id")
     private UserEntity creator;
 
+    @Column(name = "facility_id")
+    private Long facilityId = 1L;
+    @ManyToOne
+    @JoinColumn(name = "facility_id", referencedColumnName = "facility_id")
+    private FacilityEntity facility;
+
     @Column(name = "name")
     private String name;
 
