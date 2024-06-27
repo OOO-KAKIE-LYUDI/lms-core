@@ -6,6 +6,8 @@ import com.lms.core.service.CategoryService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import java.util.List;
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
+@Validated
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -32,6 +35,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     CategoryDto findById(@PathVariable @NotNull Long id) {
         return categoryService.findCategoryById(id);
     }

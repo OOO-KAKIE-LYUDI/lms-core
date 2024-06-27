@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,35 +18,34 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final LmsAuthenticationManager lmsAuthenticationManager;
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter, AuthenticationProvider authenticationProvider) throws Exception {
-        // Enable CORS and disable CSRF
-        http.csrf().disable();
-//        http.cors().disable();
-
-        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-        // Set session management to stateless
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.authenticationProvider(authenticationProvider);
-        http.authenticationManager(lmsAuthenticationManager);
-
-        http.authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
-        ).httpBasic(Customizer.withDefaults());
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
+        //        http.cors().disable();
+        http
+                .csrf().disable()
+                .authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .anyRequest().authenticated()
+                ).httpBasic(Customizer.withDefaults())
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authenticationManager(lmsAuthenticationManager)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
