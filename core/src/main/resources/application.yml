@@ -22,3 +22,13 @@ jwt:
   public:
     key: classpath:/security/rsa.public.pem
   expiry: 36000L
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+    display-request-duration: true
+    disable-swagger-default-url: true

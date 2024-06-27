@@ -9,6 +9,10 @@ import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
+
+    @Mappings({
+            @Mapping(target = "name", source = "userDto.name"),
+    })
     UserEntity createUser(RegisterUserDto userDto, String email, String password);
 
     UserDto createGetUserDto(UserEntity user);
