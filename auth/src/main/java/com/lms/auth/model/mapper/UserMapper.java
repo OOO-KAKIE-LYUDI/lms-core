@@ -10,10 +10,21 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-//    @Mappings({
-//            @Mapping(target = "name", source = "userDto.name"),
-//    })
+    @Mappings({
+            @Mapping(target = "name", source = "userDto.name"),
+            @Mapping(target = "role", source = "userDto.role"),
+            @Mapping(target = "email", source = "email"),
+            @Mapping(target = "password", source = "password")
+    })
     UserEntity createUser(RegisterUserDto userDto, String email, String password);
 
+    @Mappings({
+            @Mapping(target = "userId", source = "userId"),
+            @Mapping(target = "name", source = "name"),
+            @Mapping(target = "email", source = "email"),
+            @Mapping(target = "role", source = "role"),
+            @Mapping(target = "created", source = "created"),
+            @Mapping(target = "updated", source = "updated"),
+    })
     UserDto createGetUserDto(UserEntity user);
 }
