@@ -31,7 +31,7 @@ public class FileController {
     }
 
     @GetMapping("/download/{key}")
-    public ResponseEntity<byte[]> downloadFile(@PathVariable String key) throws IOException {
+    public ResponseEntity<byte[]> downloadFile(@PathVariable String key) {
         byte[] fileBytes = fileService.downloadFile(key);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + key + "\"")

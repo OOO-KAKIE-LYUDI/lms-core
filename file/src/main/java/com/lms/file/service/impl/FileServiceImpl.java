@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService {
         return key;
     }
 
-    public byte[] downloadFile(String key) throws IOException {
+    public byte[] downloadFile(String key) {
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                 .bucket(bucketName)
                 .key(key)
