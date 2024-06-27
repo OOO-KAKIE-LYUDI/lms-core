@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS lms.course
     course_id   SERIAL PRIMARY KEY,
     category_id BIGINT REFERENCES lms.category (category_id) ON DELETE CASCADE,
     creator_id  BIGINT REFERENCES lms."user" (user_id) ON DELETE CASCADE,
+    facility_id BIGINT REFERENCES lms.facility (facility_id) ON DELETE CASCADE,
     name        VARCHAR   NOT NULL,
     description TEXT,
     created     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -68,4 +69,12 @@ CREATE TABLE IF NOT EXISTS lms.file
     orig_name VARCHAR NOT NULL,
     file_name VARCHAR NOT NULL,
     bucket    VARCHAR NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS lms.facility
+(
+    facility_id BIGSERIAL PRIMARY KEY,
+    name        VARCHAR   NOT NULL,
+    created     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated     TIMESTAMP
 );
