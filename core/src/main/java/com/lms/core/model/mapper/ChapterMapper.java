@@ -5,6 +5,7 @@ import com.lms.core.model.dto.chapter.ChapterRequest;
 import com.lms.core.model.dto.chapter.ChapterRequestUpdate;
 import com.lms.core.model.entity.ChapterEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ChapterMapper {
@@ -13,5 +14,5 @@ public interface ChapterMapper {
 
     ChapterEntity toEntity(ChapterRequest chapterRequest);
 
-    void updateEntity(ChapterEntity chapterEntity, ChapterRequestUpdate chapterRequestUpdate);
+    void updateEntity(@MappingTarget ChapterEntity chapterEntity, ChapterRequestUpdate chapterRequestUpdate);
 }

@@ -10,11 +10,11 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
-    CategoryDto createCategoryDto(CategoryEntity categoryEntity);
+    CategoryDto toDto(CategoryEntity categoryEntity);
 
     @Mappings(value = {
             @Mapping(target = "name", source = "name")
     })
-    CategoryEntity createCategoryEntity(CategoryRequest source);
+    CategoryEntity toEntity(CategoryRequest source);
 }
 

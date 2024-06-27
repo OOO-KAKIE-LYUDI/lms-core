@@ -5,6 +5,7 @@ import com.lms.core.model.dto.attacment.AttachmentRequest;
 import com.lms.core.model.dto.attacment.AttachmentRequestUpdate;
 import com.lms.core.model.entity.AttachmentEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface AttachmentMapper {
@@ -13,5 +14,5 @@ public interface AttachmentMapper {
 
     AttachmentEntity toEntity(AttachmentRequest attachmentRequest);
 
-    void updateEntity(AttachmentEntity attachmentEntity, AttachmentRequestUpdate attachmentRequestUpdate);
+    void updateEntity(@MappingTarget AttachmentEntity attachmentEntity, AttachmentRequestUpdate attachmentRequestUpdate);
 }

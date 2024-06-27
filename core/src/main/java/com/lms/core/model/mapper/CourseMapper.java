@@ -14,9 +14,9 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 @Mapper(componentModel = "spring")
 public interface CourseMapper {
 
-    CourseDto createCourseDto(CourseEntity course);
+    CourseDto toDto(CourseEntity course);
 
-    CourseEntity createCourseEntity(CourseRequest source);
+    CourseEntity toEntity(CourseRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
     void updateCourseEntity(@MappingTarget CourseEntity target, @Nullable CourseRequestUpdate source);

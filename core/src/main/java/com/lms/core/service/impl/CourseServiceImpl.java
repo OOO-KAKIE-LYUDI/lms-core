@@ -30,7 +30,7 @@ public class CourseServiceImpl implements CourseService {
             throw new LmsNotFoundException("Not found courses");
         }
 
-        return courses.stream().map(courseMapper::createCourseDto).toList();
+        return courses.stream().map(courseMapper::toDto).toList();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CourseServiceImpl implements CourseService {
         var course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new LmsNotFoundException("Not found course by id"));
 
-        return courseMapper.createCourseDto(course);
+        return courseMapper.toDto(course);
     }
 
     @Override
@@ -49,12 +49,12 @@ public class CourseServiceImpl implements CourseService {
             throw new LmsNotFoundException("Not found courses");
         }
 
-        return courses.stream().map(courseMapper::createCourseDto).toList();
+        return courses.stream().map(courseMapper::toDto).toList();
     }
 
     @Override
     public void createCourse(CourseRequest courseRequest) {
-        var categoryEntity = courseMapper.createCourseEntity(courseRequest);
+        var categoryEntity = courseMapper.toEntity(courseRequest);
         courseRepository.save(categoryEntity);
     }
 

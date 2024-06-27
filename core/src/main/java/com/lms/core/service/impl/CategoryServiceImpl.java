@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new LmsNotFoundException("Not found categories");
         }
 
-        return categories.stream().map(categoryMapper::createCategoryDto).toList();
+        return categories.stream().map(categoryMapper::toDto).toList();
     }
 
     @Override
@@ -39,12 +39,12 @@ public class CategoryServiceImpl implements CategoryService {
         var category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new LmsNotFoundException("Not found category by id = <%d>".formatted(categoryId)));
 
-        return categoryMapper.createCategoryDto(category);
+        return categoryMapper.toDto(category);
     }
 
     @Override
     public void createCategory(CategoryRequest categoryRequest) {
-        var categoryEntity = categoryMapper.createCategoryEntity(categoryRequest);
+        var categoryEntity = categoryMapper.toEntity(categoryRequest);
         categoryRepository.save(categoryEntity);
     }
 
