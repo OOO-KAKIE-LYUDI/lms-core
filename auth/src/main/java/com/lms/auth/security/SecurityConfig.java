@@ -1,5 +1,6 @@
 package com.lms.auth.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,7 +16,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final LmsAuthenticationManager lmsAuthenticationManager;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter, AuthenticationProvider authenticationProvider) throws Exception {
@@ -29,15 +33,13 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authenticationProvider(authenticationProvider);
+        http.authenticationManager(lmsAuthenticationManager);
 
-        // Set permissions on endpoints
-        http.authorizeRequests()
-                // Our private endpoints
-                .anyRequest()
-                .authenticated()
-                // Set up oauth2 resource server
-                .and()
-                .httpBasic(Customizer.withDefaults());
+        http.authorizeHttpRequests(authorizeRequests ->
+                authorizeRequests
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated()
+        ).httpBasic(Customizer.withDefaults());
 
         return http.build();
     }

@@ -1,6 +1,7 @@
 package com.lms.auth.security;
 
 import com.lms.auth.service.impl.AuthServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,7 +13,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LmsAuthenticationManager implements AuthenticationManager {
+
+    @Autowired
     private AuthServiceImpl customUserDetailsService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
