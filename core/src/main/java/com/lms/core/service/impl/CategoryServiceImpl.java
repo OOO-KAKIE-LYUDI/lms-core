@@ -2,7 +2,7 @@ package com.lms.core.service.impl;
 
 import com.lms.core.model.dto.category.CategoryDto;
 import com.lms.core.model.dto.category.CategoryRequest;
-import com.lms.core.model.entity.Category;
+import com.lms.core.model.entity.CategoryEntity;
 import com.lms.core.model.mapper.CategoryMapper;
 import com.lms.core.repository.CategoryRepository;
 import com.lms.core.service.CategoryService;
@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> findAllCategories() {
-        List<Category> categories = categoryRepository.findAll();
+        List<CategoryEntity> categories = categoryRepository.findAll();
 
         if (CollectionUtils.isEmpty(categories)) {
             throw new LmsNotFoundException("Not found categories");
@@ -44,8 +44,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(CategoryRequest categoryRequest) {
-        Category category = categoryMapper.createCategory(categoryRequest);
-        categoryRepository.save(category);
+        var categoryEntity = categoryMapper.createCategoryEntity(categoryRequest);
+        categoryRepository.save(categoryEntity);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
         var category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new LmsNotFoundException("Not found category by id = <%d>".formatted(categoryId)));
 
-        category.setName(categoryRequest.getName());
+        category.setName(categoryRequest.name());
     }
 
     @Override

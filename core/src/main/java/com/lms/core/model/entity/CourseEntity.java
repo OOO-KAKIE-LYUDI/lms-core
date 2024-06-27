@@ -1,9 +1,13 @@
 package com.lms.core.model.entity;
 
+import com.lms.auth.model.entity.UserEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -15,26 +19,41 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
-
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "category", schema = "lms")
-public class Category {
+@Table(name = "course", schema = "lms")
+public class CourseEntity {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "category_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_id")
+    private Long courseId;
+
+    @Column(name = "category_id", updatable = false, insertable = false)
     private Long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private CategoryEntity categoryEntity;
+
+    @Column(name = "creator_id", updatable = false, insertable = false)
+    private Long creatorId;
+    @ManyToOne
+    @JoinColumn(name = "creator_id", referencedColumnName = "user_id")
+    private UserEntity creator;
+
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "created")
     private LocalDateTime created;
+
     @Column(name = "updated")
     private LocalDateTime updated;
 
@@ -48,3 +67,4 @@ public class Category {
         updated = LocalDateTime.now();
     }
 }
+
