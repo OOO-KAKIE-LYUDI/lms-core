@@ -1,5 +1,6 @@
 package com.lms.core.model.entity;
 
+import com.lms.auth.model.entity.UserEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,13 +25,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "chapter", schema = "lms")
-public class ChapterEntity {
+@Table(name = "purchase", schema = "lms")
+public class PurchaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chapter_id")
-    private Long chapterId;
+    @Column(name = "purchase_id")
+    private Long purchaseId;
+
+    @Column(name = "user_id", updatable = false, insertable = false)
+    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private UserEntity user;
 
     @Column(name = "course_id", updatable = false, insertable = false)
     private Long courseId;
@@ -38,24 +45,11 @@ public class ChapterEntity {
     @JoinColumn(name = "course_id", referencedColumnName = "course_id")
     private CourseEntity course;
 
-    @Column(name = "title")
-    private String title;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "position")
-    private Integer position;
-
-    @Column(name = "isPublished")
-    private Boolean isPublished;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
 
     @PrePersist
     public void prePersist() {

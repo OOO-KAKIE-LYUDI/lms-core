@@ -36,7 +36,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public List<AttachmentDto> findAttachmentsByChapterId(Long chapterId) {
-        var attachments = attachmentRepository.findByChapterId(chapterId);
+        var attachments = attachmentRepository.findByCourseId(chapterId);
 
         if (CollectionUtils.isEmpty(attachments)) {
             throw new LmsNotFoundException("No attachments found for chapter id: " + chapterId);

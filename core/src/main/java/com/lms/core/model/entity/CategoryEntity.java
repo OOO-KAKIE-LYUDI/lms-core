@@ -39,18 +39,20 @@ public class CategoryEntity {
     @OneToMany(mappedBy = "categoryEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CourseEntity> courses;
 
-    @Column(name = "created")
-    private LocalDateTime created;
-    @Column(name = "updated")
-    private LocalDateTime updated;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
 
     @PrePersist
     public void prePersist() {
-        created = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updated = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 }

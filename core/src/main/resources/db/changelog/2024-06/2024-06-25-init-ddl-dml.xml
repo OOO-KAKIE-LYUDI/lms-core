@@ -9,4 +9,8 @@
         <sqlFile path="sql/init-ddl.sql" dbms="postgresql" relativeToChangelogFile="true"/>
     </changeSet>
 
+    <changeSet id="init-dml" author="alexbossov">
+        <sqlFile path="sql/init-dml.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+    </changeSet>
+
 </databaseChangeLog>

@@ -1,10 +1,20 @@
 package com.lms.core.model.mapper;
 
+import com.lms.core.model.dto.category.CategoryDto;
+import com.lms.core.model.dto.chapter.ChapterDto;
 import com.lms.core.model.dto.course.CourseDto;
 import com.lms.core.model.dto.course.CourseRequest;
 import com.lms.core.model.dto.course.CourseRequestUpdate;
+import com.lms.core.model.dto.purchase.PurchaseDto;
+import com.lms.core.model.entity.CategoryEntity;
+import com.lms.core.model.entity.ChapterEntity;
 import com.lms.core.model.entity.CourseEntity;
-import org.mapstruct.*;
+import com.lms.core.model.entity.PurchaseEntity;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 import org.springframework.lang.Nullable;
 
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
@@ -13,24 +23,24 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 public interface CourseMapper {
 
     @Mappings({
-            @Mapping(target = "courseId", source = "courseId"),
-            @Mapping(target = "categoryId", source = "categoryId"),
-            @Mapping(target = "creatorId", source = "creatorId"),
-            @Mapping(target = "name", source = "name"),
-            @Mapping(target = "description", source = "description"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated"),
+            @Mapping(source = "creator.userId", target = "userId"),
+            @Mapping(source = "categoryEntity.categoryId", target = "categoryId"),
+            @Mapping(source = "categoryEntity", target = "category"),
+            @Mapping(source = "chapters", target = "chapters"),
+            @Mapping(source = "purchases", target = "purchases")
     })
     CourseDto toDto(CourseEntity course);
 
+    CategoryDto toDto(CategoryEntity category);
+
+    ChapterDto toDto(ChapterEntity chapter);
+
+    PurchaseDto toDto(PurchaseEntity purchase);
+
     @Mappings({
-            @Mapping(target = "courseId", source = "courseId"),
             @Mapping(target = "categoryId", source = "categoryId"),
-            @Mapping(target = "creatorId", source = "creatorId"),
-            @Mapping(target = "name", source = "name"),
+            @Mapping(target = "title", source = "name"),
             @Mapping(target = "description", source = "description"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated"),
     })
     CourseEntity toEntity(CourseRequest source);
 

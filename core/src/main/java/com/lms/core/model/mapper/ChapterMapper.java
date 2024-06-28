@@ -19,20 +19,17 @@ public interface ChapterMapper {
             @Mapping(target = "description", source = "description"),
             @Mapping(target = "position", source = "position"),
             @Mapping(target = "isPublished", source = "isPublished"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated"),
+            @Mapping(target = "createdAt", source = "createdAt"),
+            @Mapping(target = "updatedAt", source = "updatedAt"),
     })
     ChapterDto toDto(ChapterEntity chapterEntity);
 
     @Mappings({
-            @Mapping(target = "chapterId", source = "chapterId"),
             @Mapping(target = "courseId", source = "courseId"),
             @Mapping(target = "title", source = "title"),
             @Mapping(target = "description", source = "description"),
             @Mapping(target = "position", source = "position"),
-            @Mapping(target = "isPublished", source = "isPublished"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated"),
+            @Mapping(target = "isPublished", source = "isPublished")
     })
     ChapterEntity toEntity(ChapterRequest chapterRequest);
 

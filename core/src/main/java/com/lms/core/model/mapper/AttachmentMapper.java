@@ -14,18 +14,18 @@ public interface AttachmentMapper {
 
     @Mappings({
             @Mapping(target = "attachmentId", source = "attachmentId"),
-            @Mapping(target = "chapterId", source = "chapterId"),
+            @Mapping(target = "chapterId", source = "courseId"),
             @Mapping(target = "name", source = "name"),
             @Mapping(target = "type", source = "type"),
             @Mapping(target = "fileId", source = "fileId"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated"),
+            @Mapping(target = "created", source = "createdAt"),
+            @Mapping(target = "updated", source = "updatedAt"),
             @Mapping(target = "position", source = "position"),
     })
     AttachmentDto toDto(AttachmentEntity attachmentEntity);
 
     @Mappings({
-            @Mapping(target = "chapterId", source = "chapterId"),
+            @Mapping(target = "courseId", source = "chapterId"),
             @Mapping(target = "name", source = "name"),
             @Mapping(target = "type", source = "type"),
             @Mapping(target = "fileId", source = "fileId"),

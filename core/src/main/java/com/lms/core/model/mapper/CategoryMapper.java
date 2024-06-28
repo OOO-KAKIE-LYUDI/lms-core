@@ -13,8 +13,8 @@ public interface CategoryMapper {
     @Mappings({
             @Mapping(target = "categoryId", source = "categoryId"),
             @Mapping(target = "name", source = "name"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated")
+            @Mapping(target = "created", source = "createdAt"),
+            @Mapping(target = "updated", source = "updatedAt")
     })
     CategoryDto toDto(CategoryEntity categoryEntity);
 

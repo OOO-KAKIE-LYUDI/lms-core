@@ -32,17 +32,20 @@ public class AttachmentEntity {
     @Column(name = "attachment_id")
     private Long attachmentId;
 
-    @Column(name = "chapter_id", updatable = false, insertable = false)
-    private Long chapterId;
+    @Column(name = "course_id", updatable = false, insertable = false)
+    private Long courseId;
     @ManyToOne
-    @JoinColumn(name = "chapter_id", referencedColumnName = "chapter_id")
-    private ChapterEntity chapter;
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+    private CourseEntity course;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "type")
     private String type;
+
+    @Column(name = "url")
+    private String url;
 
     @Column(name = "file_id", updatable = false, insertable = false)
     private Long fileId;
@@ -53,21 +56,21 @@ public class AttachmentEntity {
     @Column(name = "position")
     private Integer position;
 
-    @Column(name = "created")
-    private LocalDateTime created;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column(name = "updated")
-    private LocalDateTime updated;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
 
     @PrePersist
     public void prePersist() {
-        created = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updated = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 }
 

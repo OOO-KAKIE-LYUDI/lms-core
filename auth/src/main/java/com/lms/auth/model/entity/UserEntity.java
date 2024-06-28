@@ -12,6 +12,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +26,7 @@ import java.util.Collections;
 @Table(name = "user", schema = "lms")
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,19 +76,19 @@ public class UserEntity implements UserDetails {
         return true;
     }
 
-    @Column(name = "created")
-    private LocalDateTime created;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column(name = "updated")
-    private LocalDateTime updated = null;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt = null;
 
     @PrePersist
     private void prePersist() {
-        created = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
     private void preUpdate() {
-        updated = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 }

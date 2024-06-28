@@ -22,19 +22,20 @@ public class FacilityEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "created")
-    private LocalDateTime created;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column(name = "updated")
-    private LocalDateTime updated;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
 
     @PrePersist
     public void prePersist() {
-        created = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
     public void preUpdate() {
-        updated = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 }

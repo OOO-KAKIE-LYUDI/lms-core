@@ -23,8 +23,8 @@ public interface UserMapper {
             @Mapping(target = "name", source = "name"),
             @Mapping(target = "email", source = "email"),
             @Mapping(target = "role", source = "role"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated"),
+            @Mapping(target = "created", source = "createdAt"),
+            @Mapping(target = "updated", source = "updatedAt"),
     })
     UserDto createGetUserDto(UserEntity user);
 }

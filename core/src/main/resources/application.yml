@@ -32,3 +32,13 @@ springdoc:
     tagsSorter: alpha
     display-request-duration: true
     disable-swagger-default-url: true
+
+cloud:
+  aws:
+    s3:
+      endpoint: https://storage.yandexcloud.net
+      region: us-east-1
+      bucket: lms-files
+      credentials:
+        accessKey: YCAJEAce5_zidwum6dmVYukyH
+        secretKey: YCNX3ocN6Z_Gm8GhtnZYCKb26qY0KGvpUZtBWRTs

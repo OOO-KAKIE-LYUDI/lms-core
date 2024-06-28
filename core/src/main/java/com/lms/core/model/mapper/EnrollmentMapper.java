@@ -16,8 +16,7 @@ public interface EnrollmentMapper {
             @Mapping(target = "enrollmentId", source = "enrollmentId"),
             @Mapping(target = "userId", source = "userId"),
             @Mapping(target = "courseId", source = "courseId"),
-            @Mapping(target = "created", source = "created"),
-            @Mapping(target = "updated", source = "updated")
+            @Mapping(target = "created", source = "createdAt"),
     })
     EnrollmentDto toDto(EnrollmentEntity enrollmentEntity);
 
