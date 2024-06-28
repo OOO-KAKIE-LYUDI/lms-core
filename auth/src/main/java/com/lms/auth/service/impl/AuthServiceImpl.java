@@ -39,11 +39,15 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     @Override
     public String login(String email, String password) {
         UserDetails user = loadUserByUsername(email);
+        var userId = userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new LmsAuthNotFoundException("Пользователь с email = <%s> не найден".formatted(email)))
+                .getUserId();
+
 //        if (!Objects.equals(passwordEncoder.encode(user.getPassword()), password)) {
 //            throw new LmsAuthUnauthorizedException("Адрес электронной почты или пароль введены неверно. Попробуйте еще раз!");
 //        }
 
-        return jwtUtils.generateToken(user);
+        return jwtUtils.generateToken(user, userId);
     }
 
     @Override
