@@ -3,7 +3,7 @@ package com.lms.core.service.impl;
 import com.lms.core.exception.LmsNotFoundException;
 import com.lms.core.model.dto.course.CourseDto;
 import com.lms.core.model.dto.course.CourseRequest;
-import com.lms.core.model.dto.course.CourseRequestUpdate;
+import com.lms.core.model.dto.course.CourseRequestPatch;
 import com.lms.core.model.mapper.CourseMapper;
 import com.lms.core.repository.CourseRepository;
 import com.lms.core.service.CourseService;
@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -70,7 +71,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void updateCourseById(Long courseId, CourseRequestUpdate courseRequest) {
+    @Transactional
+    public void updateCourseById(Long courseId, CourseRequestPatch courseRequest) {
         var course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new LmsNotFoundException("Not found course by id = <%d>".formatted(courseId)));
 

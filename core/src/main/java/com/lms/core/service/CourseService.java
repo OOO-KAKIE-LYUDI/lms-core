@@ -2,7 +2,7 @@ package com.lms.core.service;
 
 import com.lms.core.model.dto.course.CourseDto;
 import com.lms.core.model.dto.course.CourseRequest;
-import com.lms.core.model.dto.course.CourseRequestUpdate;
+import com.lms.core.model.dto.course.CourseRequestPatch;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface CourseService {
 
     void createCourse(CourseRequest courseRequest);
 
-    void updateCourseById(Long categoryId, CourseRequestUpdate courseRequest);
+    void updateCourseById(Long categoryId, CourseRequestPatch courseRequest);
 
     void deleteCourseById(Long categoryId);
 }

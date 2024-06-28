@@ -44,7 +44,7 @@ public class UserEntity implements UserDetails {
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
+    private Role role = Role.STUDENT;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

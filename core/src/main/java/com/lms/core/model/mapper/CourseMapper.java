@@ -4,7 +4,7 @@ import com.lms.core.model.dto.category.CategoryDto;
 import com.lms.core.model.dto.chapter.ChapterDto;
 import com.lms.core.model.dto.course.CourseDto;
 import com.lms.core.model.dto.course.CourseRequest;
-import com.lms.core.model.dto.course.CourseRequestUpdate;
+import com.lms.core.model.dto.course.CourseRequestPatch;
 import com.lms.core.model.dto.purchase.PurchaseDto;
 import com.lms.core.model.entity.CategoryEntity;
 import com.lms.core.model.entity.ChapterEntity;
@@ -37,13 +37,8 @@ public interface CourseMapper {
 
     PurchaseDto toDto(PurchaseEntity purchase);
 
-    @Mappings({
-            @Mapping(target = "categoryId", source = "categoryId"),
-            @Mapping(target = "title", source = "name"),
-            @Mapping(target = "description", source = "description"),
-    })
     CourseEntity toEntity(CourseRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
-    void updateCourseEntity(@MappingTarget CourseEntity target, @Nullable CourseRequestUpdate source);
+    void updateCourseEntity(@MappingTarget CourseEntity target, @Nullable CourseRequestPatch source);
 }

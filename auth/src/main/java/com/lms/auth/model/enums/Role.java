@@ -1,7 +1,7 @@
 package com.lms.auth.model.enums;
 
 public enum Role {
-    USER,
+    STUDENT,
     ADMINISTRATOR,
     TEACHER,
 }

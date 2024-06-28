@@ -2,7 +2,7 @@ package com.lms.core.controller;
 
 import com.lms.core.model.dto.course.CourseDto;
 import com.lms.core.model.dto.course.CourseRequest;
-import com.lms.core.model.dto.course.CourseRequestUpdate;
+import com.lms.core.model.dto.course.CourseRequestPatch;
 import com.lms.core.service.CourseService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -67,7 +67,7 @@ public class CourseController {
                      @RequestBody
                      @NotNull
                      @Valid
-                     CourseRequestUpdate courseRequest) {
+                     CourseRequestPatch courseRequest) {
         courseService.updateCourseById(id, courseRequest);
     }
 }

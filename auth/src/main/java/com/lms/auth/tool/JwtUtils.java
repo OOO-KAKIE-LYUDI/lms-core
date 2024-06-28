@@ -19,7 +19,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtils {
-    private Long expiry = 60 * 60 * 1000L;
+    private Long expiry = 60 * 60 * 1000L * 1000L;
 
     @Value("${jwt.public.key}")
     private RSAPublicKey rsaPublicKey;
