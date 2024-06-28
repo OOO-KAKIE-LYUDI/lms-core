@@ -37,6 +37,11 @@ public class CourseController {
         return courseService.findCourseById(id);
     }
 
+    @GetMapping("/user/{id}")
+    List<CourseDto> findAllCourses(@PathVariable @NotNull Long id) {
+        return courseService.findAllByCreatorId(id);
+    }
+
     @GetMapping("/category/{category}")
     List<CourseDto> findCourseByCategory(@PathVariable String category) {
         return courseService.findCourseByCategory(category);

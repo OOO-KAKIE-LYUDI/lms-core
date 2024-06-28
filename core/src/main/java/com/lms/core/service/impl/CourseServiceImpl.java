@@ -42,6 +42,17 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<CourseDto> findAllByCreatorId(Long userId) {
+        var courses = courseRepository.findByCreatorId(userId);
+
+        if (CollectionUtils.isEmpty(courses)) {
+            throw new LmsNotFoundException("Not found courses by userId = <%d>".formatted(userId));
+        }
+
+        return courses.stream().map(courseMapper::toDto).toList();
+    }
+
+    @Override
     public List<CourseDto> findCourseByCategory(String category) {
         var courses = courseRepository.findByCategoryEntityName(category);
 

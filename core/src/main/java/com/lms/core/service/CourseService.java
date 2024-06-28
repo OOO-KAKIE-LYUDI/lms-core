@@ -11,6 +11,8 @@ public interface CourseService {
 
     CourseDto findCourseById(Long categoryId);
 
+    List<CourseDto> findAllByCreatorId(Long userId);
+
     List<CourseDto> findCourseByCategory(String category);
 
     void createCourse(CourseRequest courseRequest);
