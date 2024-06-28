@@ -10,3 +10,12 @@ services:
       POSTGRES_DB: lmsdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1qaz2wsx
+
+  zipkin:
+    image: openzipkin/zipkin:2.23.2
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    environment:
+      - STORAGE_TYPE=mem
+      - ZIPKIN_UI_BANNER=Welcome to Zipkin!
