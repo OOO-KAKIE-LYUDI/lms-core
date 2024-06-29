@@ -47,7 +47,6 @@ logging:
   level:
     web: TRACE
 
-
 cloud:
   aws:
     s3:
@@ -57,3 +56,5 @@ cloud:
       credentials:
         accessKey: YCAJEAce5_zidwum6dmVYukyH
         secretKey: YCNX3ocN6Z_Gm8GhtnZYCKb26qY0KGvpUZtBWRTs
+
+allowed-origin: http://localhost:3000
