@@ -28,7 +28,7 @@ public class ChapterServiceImpl implements ChapterService {
         var chapters = chapterRepository.findAll();
 
         if (CollectionUtils.isEmpty(chapters)) {
-            throw new LmsNotFoundException("No chapters found");
+            throw new LmsNotFoundException("Не найдено ни одного главы");
         }
 
         return chapters.stream().map(chapterMapper::toDto).collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class ChapterServiceImpl implements ChapterService {
         var chapters = chapterRepository.findByCourseId(courseId);
 
         if (CollectionUtils.isEmpty(chapters)) {
-            throw new LmsNotFoundException("No chapters found for course id: " + courseId);
+            throw new LmsNotFoundException("Не найдено ни одного главы с <courseId>=%d".formatted(courseId));
         }
 
         return chapters.stream().map(chapterMapper::toDto).collect(Collectors.toList());
@@ -54,7 +54,7 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public void updateChapterById(Long chapterId, ChapterRequestUpdate chapterRequest) {
         var chapter = chapterRepository.findById(chapterId)
-                .orElseThrow(() -> new LmsNotFoundException("Chapter not found with id: " + chapterId));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено ни одной главы с <chapterId>=%d".formatted(chapterId)));
 
         chapterMapper.updateEntity(chapter, chapterRequest);
         chapterRepository.save(chapter);
@@ -63,7 +63,7 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public void deleteChapterById(Long chapterId) {
         if (!chapterRepository.existsById(chapterId)) {
-            throw new LmsNotFoundException("Chapter not found with id: " + chapterId);
+            throw new LmsNotFoundException("Не найдено ни одной главы с <chapterId>=%d".formatted(chapterId));
         }
         chapterRepository.deleteById(chapterId);
     }

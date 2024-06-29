@@ -28,7 +28,7 @@ public class CourseServiceImpl implements CourseService {
         var courses = courseRepository.findAll();
 
         if (CollectionUtils.isEmpty(courses)) {
-            throw new LmsNotFoundException("Not found courses");
+            throw new LmsNotFoundException("Не найдено ни одного курса");
         }
 
         return courses.stream().map(courseMapper::toDto).toList();
@@ -37,7 +37,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDto findCourseById(Long courseId) {
         var course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new LmsNotFoundException("Not found course by id"));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено ни одного курса с <courseId>=%d".formatted(courseId)));
 
         return courseMapper.toDto(course);
     }
@@ -47,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
         var courses = courseRepository.findByCreatorId(userId);
 
         if (CollectionUtils.isEmpty(courses)) {
-            throw new LmsNotFoundException("Not found courses by userId = <%d>".formatted(userId));
+            throw new LmsNotFoundException("Не найдено ни одного курса с <userId>=%d".formatted(userId));
         }
 
         return courses.stream().map(courseMapper::toDto).toList();
@@ -58,7 +58,7 @@ public class CourseServiceImpl implements CourseService {
         var courses = courseRepository.findByCategoryEntityName(category);
 
         if (CollectionUtils.isEmpty(courses)) {
-            throw new LmsNotFoundException("Not found courses");
+            throw new LmsNotFoundException("Не найдено ни одного курса c <categoryName>=%s".formatted(category));
         }
 
         return courses.stream().map(courseMapper::toDto).toList();
@@ -74,13 +74,16 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public void updateCourseById(Long courseId, CourseRequestPatch courseRequest) {
         var course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new LmsNotFoundException("Not found course by id = <%d>".formatted(courseId)));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено ни одного курса с <courseId>=%d".formatted(courseId)));
 
         courseMapper.updateCourseEntity(course, courseRequest);
     }
 
     @Override
     public void deleteCourseById(Long courseId) {
+        if (!courseRepository.existsById(courseId)) {
+            throw new LmsNotFoundException("Не найдено ни одного курса c <courseId>=%d".formatted(courseId));
+        }
         courseRepository.deleteById(courseId);
     }
 }

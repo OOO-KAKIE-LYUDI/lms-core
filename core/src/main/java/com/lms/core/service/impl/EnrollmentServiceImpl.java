@@ -28,7 +28,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         var enrollments = enrollmentRepository.findAll();
 
         if (CollectionUtils.isEmpty(enrollments)) {
-            throw new LmsNotFoundException("No enrollments found");
+            throw new LmsNotFoundException("Не найдено ни одной записи на курс");
         }
 
         return enrollments.stream().map(enrollmentMapper::toDto).collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         var enrollments = enrollmentRepository.findByCourseId(courseId);
 
         if (CollectionUtils.isEmpty(enrollments)) {
-            throw new LmsNotFoundException("No enrollments found for course id: " + courseId);
+            throw new LmsNotFoundException("Не найдено ни одной записи c <courseId>=%d".formatted(courseId));
         }
 
         return enrollments.stream().map(enrollmentMapper::toDto).collect(Collectors.toList());
@@ -50,7 +50,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         var enrollments = enrollmentRepository.findByUserId(userId);
 
         if (CollectionUtils.isEmpty(enrollments)) {
-            throw new LmsNotFoundException("No enrollments found for user id: " + userId);
+            throw new LmsNotFoundException("Не найдено ни одной записи c <userId>=%d".formatted(userId));
         }
 
         return enrollments.stream().map(enrollmentMapper::toDto).collect(Collectors.toList());
@@ -59,7 +59,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Override
     public EnrollmentDto findEnrollmentById(Long id) {
         var enrollment = enrollmentRepository.findById(id)
-                .orElseThrow(() -> new LmsNotFoundException("Enrollment not found with id: " + id));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено ни одной записи c <id>=%d".formatted(id)));
 
         return enrollmentMapper.toDto(enrollment);
     }
@@ -73,7 +73,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Override
     public void updateEnrollmentById(Long id, EnrollmentRequestUpdate enrollmentRequest) {
         var enrollment = enrollmentRepository.findById(id)
-                .orElseThrow(() -> new LmsNotFoundException("Enrollment not found with id: " + id));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено ни одной записи c <id>=%d".formatted(id)));
 
         enrollmentMapper.updateEntity(enrollment, enrollmentRequest);
         enrollmentRepository.save(enrollment);
@@ -82,7 +82,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Override
     public void deleteEnrollmentById(Long id) {
         if (!enrollmentRepository.existsById(id)) {
-            throw new LmsNotFoundException("Enrollment not found with id: " + id);
+            throw new LmsNotFoundException("Не найдено ни одной записи c <id>=%d".formatted(id));
         }
         enrollmentRepository.deleteById(id);
     }

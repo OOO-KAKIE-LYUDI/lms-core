@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryEntity> categories = categoryRepository.findAll();
 
         if (CollectionUtils.isEmpty(categories)) {
-            throw new LmsNotFoundException("Not found categories");
+            throw new LmsNotFoundException("Не найдено ни одной категории");
         }
 
         return categories.stream().map(categoryMapper::toDto).toList();
@@ -37,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto findCategoryById(Long categoryId) {
         var category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new LmsNotFoundException("Not found category by id = <%d>".formatted(categoryId)));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено ни одной категории с <categoryId>=%d".formatted(categoryId)));
 
         return categoryMapper.toDto(category);
     }
@@ -52,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public void updateCategoryById(Long categoryId, CategoryRequest categoryRequest) {
         var category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new LmsNotFoundException("Not found category by id = <%d>".formatted(categoryId)));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено ни одной категории с <categoryId>=%d".formatted(categoryId)));
 
         category.setName(categoryRequest.name());
     }

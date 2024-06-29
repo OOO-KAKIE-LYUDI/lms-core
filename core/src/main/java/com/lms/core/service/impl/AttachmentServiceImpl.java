@@ -28,7 +28,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         var attachments = attachmentRepository.findAll();
 
         if (CollectionUtils.isEmpty(attachments)) {
-            throw new LmsNotFoundException("No attachments found");
+            throw new LmsNotFoundException("Не найдено ни одного вложения");
         }
 
         return attachments.stream().map(attachmentMapper::toDto).collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         var attachments = attachmentRepository.findByCourseId(chapterId);
 
         if (CollectionUtils.isEmpty(attachments)) {
-            throw new LmsNotFoundException("No attachments found for chapter id: " + chapterId);
+            throw new LmsNotFoundException("Не найдено вложения с <chapterId>=%d".formatted(chapterId));
         }
 
         return attachments.stream().map(attachmentMapper::toDto).collect(Collectors.toList());
@@ -48,7 +48,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public AttachmentDto findAttachmentById(Long id) {
         var attachment = attachmentRepository.findById(id)
-                .orElseThrow(() -> new LmsNotFoundException("Attachment not found with id: " + id));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено вложения с <id>=%d".formatted(id)));
 
         return attachmentMapper.toDto(attachment);
     }
@@ -62,7 +62,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public void updateAttachmentById(Long id, AttachmentRequestUpdate attachmentRequest) {
         var attachment = attachmentRepository.findById(id)
-                .orElseThrow(() -> new LmsNotFoundException("Attachment not found with id: " + id));
+                .orElseThrow(() -> new LmsNotFoundException("Не найдено вложения с <id>=%d".formatted(id)));
 
         attachmentMapper.updateEntity(attachment, attachmentRequest);
         attachmentRepository.save(attachment);
@@ -71,7 +71,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public void deleteAttachmentById(Long id) {
         if (!attachmentRepository.existsById(id)) {
-            throw new LmsNotFoundException("Attachment not found with id: " + id);
+            throw new LmsNotFoundException("Не найдено вложения с <id>=%d".formatted(id));
         }
         attachmentRepository.deleteById(id);
     }
