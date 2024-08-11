@@ -91,3 +91,50 @@ CREATE TABLE IF NOT EXISTS lms.file
     file_name VARCHAR NOT NULL,
     bucket    VARCHAR NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS lms.assignment
+(
+    assignment_id BIGSERIAL PRIMARY KEY,
+    course_id     BIGINT       NOT NULL REFERENCES lms.course (course_id) ON DELETE CASCADE,
+    title         VARCHAR(255) NOT NULL,
+    description   TEXT,
+    is_deleted    BOOLEAN default false,
+    created_at    TIMESTAMP    NOT NULL,
+    updated_at    TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS lms.assignment_step
+(
+    assignment_step_id BIGSERIAL PRIMARY KEY,
+    course_id          BIGINT       NOT NULL REFERENCES lms.course (course_id) ON DELETE CASCADE,
+    type               VARCHAR(255) NOT NULL,
+    title              VARCHAR(255) NOT NULL,
+    description        TEXT,
+    position           INTEGER      NOT NULL,
+    is_deleted         BOOLEAN default false,
+    created_at         TIMESTAMP    NOT NULL,
+    updated_at         TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS lms.survey_assignment_step
+(
+    assignment_step_id BIGINT PRIMARY KEY,
+    type               TEXT NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS lms.survey_assignment_step_answer
+(
+    survey_assignment_step_answer_id BIGSERIAL PRIMARY KEY,
+    assignment_step_id               BIGINT       NOT NULL REFERENCES lms.survey_assignment_step (assignment_step_id) ON DELETE CASCADE,
+    name                             VARCHAR(255) NOT NULL,
+    is_correct                       BOOLEAN      NOT NULL,
+    created_at                       TIMESTAMP    NOT NULL,
+    updated_at                       TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS lms.text_assignment_step
+(
+    assignment_step_id BIGINT PRIMARY KEY,
+    correct_answer     TEXT
+);
