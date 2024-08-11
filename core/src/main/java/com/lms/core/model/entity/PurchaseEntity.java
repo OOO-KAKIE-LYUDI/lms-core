@@ -33,16 +33,16 @@ public class PurchaseEntity {
     @Column(name = "purchase_id")
     private Long purchaseId;
 
-    @Column(name = "user_id", updatable = false, insertable = false)
+    @Column(name = "user_id")
     private Long userId;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", updatable = false, insertable = false)
     private UserEntity user;
 
-    @Column(name = "course_id", updatable = false, insertable = false)
+    @Column(name = "course_id")
     private Long courseId;
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id", updatable = false, insertable = false)
     private CourseEntity course;
 
     @Column(name = "created_at")
