@@ -42,6 +42,8 @@ public class SecurityConfig {
                                 authorizeRequests
                                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                         .requestMatchers("/api/auth/**").permitAll()
+                                        .requestMatchers("/api/algo/**").permitAll()
+
                                         .requestMatchers(HttpMethod.POST, "/api/categories/**").hasAuthority(ADMINISTRATOR.name())
                                         .requestMatchers(HttpMethod.DELETE, "/api/categories/**").hasAuthority(ADMINISTRATOR.name())
                                         .requestMatchers(HttpMethod.PATCH, "/api/categories/**").hasAuthority(ADMINISTRATOR.name())

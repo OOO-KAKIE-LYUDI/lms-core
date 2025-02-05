@@ -1,24 +1,25 @@
 package com.lms.algo.service;
 
-import com.lms.algo.model.entity.Submission;
+import com.lms.algo.model.entity.SubmissionEntity;
 import com.lms.algo.repository.SubmissionRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SubmissionService {
+
+    @Autowired
     private final SubmissionRepository submissionRepository;
 
-    public SubmissionService(SubmissionRepository submissionRepository) {
-        this.submissionRepository = submissionRepository;
-    }
-
-    public List<Submission> getAllSubmissions() {
+    public List<SubmissionEntity> getAllSubmissions() {
         return submissionRepository.findAll();
     }
 
-    public Submission createSubmission(Submission submission) {
-        return submissionRepository.save(submission);
+    public SubmissionEntity createSubmission(SubmissionEntity submissionEntity) {
+        return submissionRepository.save(submissionEntity);
     }
 }

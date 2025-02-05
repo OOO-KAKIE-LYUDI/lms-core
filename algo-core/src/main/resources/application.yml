@@ -20,11 +20,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
-  liquibase:
-    enabled: true
-    user: postgres
-    password: 1qaz2wsx
-    change-log: classpath:db/changelog/Changelog.xml  # указываем путь к файлу изменений Liquibase
 
 jwt:
   private:

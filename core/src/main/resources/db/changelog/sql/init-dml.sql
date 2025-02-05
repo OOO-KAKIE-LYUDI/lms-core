@@ -3,14 +3,17 @@ VALUES (1, 'Java'),
        (2, 'Math'),
        (3, 'Physics'),
        (4, 'Test Category'),
-       (5, 'Category 5');
+       (5, 'Category 5')
+ON CONFLICT (category_id) DO NOTHING;
 
 INSERT INTO lms."user" (user_id, name, email, password, role)
 VALUES (1, 'Alex', 's.bosov2012@yandex.ru', '$2a$10$1D7QTBMr1lrXheLN8HV9iuhl7L.Zu5GBMn.y0guNazBGiPrIIfuhK', 'ADMINISTRATOR'),
        (2, 'Kirill', 'kirill@gmail.com', '$2a$10$1D7QTBMr1lrXheLN8HV9iuhl7L.Zu5GBMn.y0guNazBGiPrIIfuhK', 'STUDENT'),
        (3, 'Rostislav', 'rostislav@example.com', '$2a$10$1D7QTBMr1lrXheLN8HV9iuhl7L.Zu5GBMn.y0guNazBGiPrIIfuhK', 'TEACHER'),
        (4, 'Nikita', 'mikita@yandex.ru', '$2a$10$1D7QTBMr1lrXheLN8HV9iuhl7L.Zu5GBMn.y0guNazBGiPrIIfuhK', 'TEACHER'),
-       (5, 'Admin', 'admin@admin.com', '$2a$10$1D7QTBMr1lrXheLN8HV9iuhl7L.Zu5GBMn.y0guNazBGiPrIIfuhK', 'STUDENT');
+       (5, 'Admin', 'admin@admin.com', '$2a$10$1D7QTBMr1lrXheLN8HV9iuhl7L.Zu5GBMn.y0guNazBGiPrIIfuhK', 'STUDENT')
+ON CONFLICT (user_id) DO NOTHING;
+
 
 INSERT INTO lms.course (course_id, category_id, creator_id, title, description, image_url, price, is_published)
 VALUES (1, 1, 3, 'Spring', 'Context', 'https://utfs.io/f/9acf5df1-f7a0-4297-ba88-c2222c062933-c8axe2.png', 1000, true),
@@ -22,7 +25,9 @@ VALUES (1, 1, 3, 'Spring', 'Context', 'https://utfs.io/f/9acf5df1-f7a0-4297-ba88
        (7, 4, 4, 'Course 7', 'Description for Course 7', 'https://utfs.io/f/9acf5df1-f7a0-4297-ba88-c2222c062933-c8axe2.png', 4321341, true),
        (8, 4, 4, 'Course 8', 'Description for Course 8', 'https://utfs.io/f/9acf5df1-f7a0-4297-ba88-c2222c062933-c8axe2.png', 22, true),
        (9, 5, 3, 'Course 9', 'Description for Course 9', 'https://utfs.io/f/9acf5df1-f7a0-4297-ba88-c2222c062933-c8axe2.png', 1000, true),
-       (10, 5, 3, 'Course 10', 'Description for Course 10', 'https://utfs.io/f/9acf5df1-f7a0-4297-ba88-c2222c062933-c8axe2.png', 1000, true);
+       (10, 5, 3, 'Course 10', 'Description for Course 10', 'https://utfs.io/f/9acf5df1-f7a0-4297-ba88-c2222c062933-c8axe2.png', 1000, true)
+ON CONFLICT (course_id) DO NOTHING;
+
 
 INSERT INTO lms.chapter (course_id, title, description, position, is_published)
 VALUES (1, 'Chapter 1.1', 'Description for Chapter 1.1', 1, TRUE),

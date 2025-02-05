@@ -4,25 +4,31 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "test_case", schema = "lms")
+@Table(name = "example", schema = "lms")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TestCase {
+public class ExampleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "example_id")
+    private Long exampleId;
 
     @ManyToOne
     @JoinColumn(name = "problem_id", nullable = false)
-    private Problem problem;
+    private ProblemEntity problemEntity;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String input;
+    private String inputText;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String expectedOutput;
+    private String outputText;
+
+    @Column(columnDefinition = "TEXT")
+    private String explanation;
+
+    @Column(columnDefinition = "TEXT")
+    private String img;
 }
-

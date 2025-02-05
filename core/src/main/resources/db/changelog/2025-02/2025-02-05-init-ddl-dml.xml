@@ -6,11 +6,11 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="init-ddl" author="alexbossov">
-        <sqlFile path="sql/init-ddl.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+        <sqlFile path="sql2/init-ddl.sql" dbms="postgresql" relativeToChangelogFile="true"/>
     </changeSet>
 
     <changeSet id="init-dml" author="alexbossov">
-        <sqlFile path="sql/init-dml.sql" dbms="postgresql" relativeToChangelogFile="true"/>
+        <sqlFile path="sql2/init-dml.sql" dbms="postgresql" relativeToChangelogFile="true"/>
     </changeSet>
 
 </databaseChangeLog>

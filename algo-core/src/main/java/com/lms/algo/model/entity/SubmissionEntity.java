@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Submission {
+public class SubmissionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "problem_id", nullable = false)
-    private Problem problem;
+    private ProblemEntity problemEntity;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String code;

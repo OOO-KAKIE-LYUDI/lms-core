@@ -18,10 +18,7 @@ dependencies {
     implementation 'org.liquibase:liquibase-core'
 
     // Spring Boot Starter WebSocket - для WebSocket API
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
-
-    // Spring Boot Starter Messaging - для STOMP/WebSocket сообщений
-    implementation 'org.springframework.boot:spring-boot-starter-messaging'
+//    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
     // Spring Kafka - для работы с Kafka
     implementation 'org.springframework.kafka:spring-kafka'

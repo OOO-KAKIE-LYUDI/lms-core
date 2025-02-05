@@ -1,4 +1,5 @@
-version: "3.1"
+version: '3.8'
+
 services:
 
   postgresdb:
@@ -7,9 +8,11 @@ services:
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_DB: lmsdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1qaz2wsx
+      POSTGRES_DB: lmsdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   zipkin:
     image: openzipkin/zipkin:2.23.2
@@ -19,3 +22,18 @@ services:
     environment:
       - STORAGE_TYPE=mem
       - ZIPKIN_UI_BANNER=Welcome to Zipkin!
+
+  core:
+    build: .
+    container_name: core
+    depends_on:
+      - postgresdb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/lmsdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1qaz2wsx
+    ports:
+      - "8088:8088"
+
+volumes:
+  postgres_data:
