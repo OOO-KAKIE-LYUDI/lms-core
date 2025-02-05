@@ -1,0 +1,60 @@
+server:
+  port: 8088
+management:
+  tracing:
+    enabled: false
+    sampling:
+      probability: 1
+  zipkin:
+    enabled: false
+    endpoint: http://localhost:9411
+    sender:
+      type: okhttp3
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/lmsdb
+    username: postgres
+    password: 1qaz2wsx
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    enabled: true
+    user: postgres
+    password: 1qaz2wsx
+    change-log: classpath:db/changelog/Changelog.xml  # указываем путь к файлу изменений Liquibase
+
+jwt:
+  private:
+    key: classpath:/security/rsa.private.pem
+  public:
+    key: classpath:/security/rsa.public.pem
+  expiry: 36000L
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+    display-request-duration: true
+    disable-swagger-default-url: true
+
+logging:
+  level:
+    web: TRACE
+
+cloud:
+  aws:
+    s3:
+      endpoint: https://storage.yandexcloud.net
+      region: us-east-1
+      bucket: lms-files
+      credentials:
+        accessKey: '****'
+        secretKey: '****'
+
+allowed-origin: http://localhost:3000
