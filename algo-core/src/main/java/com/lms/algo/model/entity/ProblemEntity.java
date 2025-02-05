@@ -44,6 +44,9 @@ public class ProblemEntity {
     @Column(nullable = false)
     private Integer dislikes = 0;
 
+    @Column(name ="`order`")
+    private Integer order;
+
     @Column
     private String videoId;
 

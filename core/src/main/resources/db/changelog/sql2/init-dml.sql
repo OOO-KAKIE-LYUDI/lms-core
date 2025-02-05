@@ -1,26 +1,26 @@
 -- Вставляем задачи (problems)
-INSERT INTO lms.problem (problem_id, title, problem_statement, constraints, category, difficulty, likes, dislikes, video_id, created_at)
+INSERT INTO lms.problem (problem_id, title, problem_statement, constraints, category, difficulty, likes, dislikes, video_id, created_at, "order")
 VALUES
     (1, 'Two Sum',
      '<p>Дан массив целых чисел <code>nums</code> и целое число <code>target</code>,
      верните индексы двух чисел таких, что их сумма равна <code>target</code>.</p>',
      '<ul><li>2 ≤ nums.length ≤ 10</li><li>-10 ≤ nums[i] ≤ 10</li><li>-10 ≤ target ≤ 10</li></ul>',
-     'Math', 'easy', 120, 8, 'dQw4w9WgXcQ', CURRENT_TIMESTAMP),
+     'Math', 'easy', 120, 8, 'dQw4w9WgXcQ', CURRENT_TIMESTAMP, 1),
 
     (2, 'Palindrome Number',
      '<p>Определите, является ли заданное целое число палиндромом.</p>',
      '<ul><li>-2³¹ ≤ x ≤ 2³¹ - 1</li></ul>',
-     'Algorithms', 'medium', 95, 12, NULL, CURRENT_TIMESTAMP),
+     'Algorithms', 'medium', 95, 12, NULL, CURRENT_TIMESTAMP, 2),
 
     (3, 'Longest Substring Without Repeating Characters',
      '<p>Найти длину самой длинной подстроки без повторяющихся символов.</p>',
      '<ul><li>0 ≤ s.length ≤ 5 * 10⁴</li></ul>',
-     'Strings', 'hard', 80, 15, 'tgbNymZ7vqY', CURRENT_TIMESTAMP),
+     'Strings', 'hard', 80, 15, 'tgbNymZ7vqY', CURRENT_TIMESTAMP, 3),
 
     (4, 'Valid Parentheses',
      '<p>Определите, является ли входная строка допустимой (правильно сбалансированной последовательностью скобок).</p>',
      '<ul><li>1 ≤ s.length ≤ 10⁴</li></ul>',
-     'Stack', 'easy', 150, 5, 'KsW6owIUwEU', CURRENT_TIMESTAMP)
+     'Stack', 'easy', 150, 5, 'KsW6owIUwEU', CURRENT_TIMESTAMP, 4)
 ON CONFLICT (problem_id) DO NOTHING;
 
 -- Вставляем примеры (examples)

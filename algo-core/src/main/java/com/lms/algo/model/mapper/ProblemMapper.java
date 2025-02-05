@@ -2,6 +2,7 @@ package com.lms.algo.model.mapper;
 
 import com.lms.algo.model.dto.ExampleDto;
 import com.lms.algo.model.dto.ProblemDto;
+import com.lms.algo.model.dto.ProblemSummaryDto;
 import com.lms.algo.model.entity.ExampleEntity;
 import com.lms.algo.model.entity.ProblemEntity;
 import org.mapstruct.Mapper;
@@ -24,6 +25,10 @@ public interface ProblemMapper {
     ExampleDto toExampleDto(ExampleEntity entity);
 
     List<ExampleDto> toExampleDtoList(List<ExampleEntity> entities);
+
+    @Mapping(source = "problemId", target = "id")
+    @Mapping(target = "link", ignore = true)
+    ProblemSummaryDto toSummaryDto(ProblemEntity entity);
+
+    List<ProblemSummaryDto> toSummaryDtoList(List<ProblemEntity> entities);
 }
-
-

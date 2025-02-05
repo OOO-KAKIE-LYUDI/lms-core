@@ -25,7 +25,6 @@ spring:
     user: postgres
     password: 1qaz2wsx
     change-log: classpath:db/changelog/Changelog.xml
-    drop-first: true
 
 jwt:
   private:
