@@ -1,6 +1,6 @@
 package com.lms.algo.service;
 
-import com.lms.algo.entity.Problem;
+import com.lms.algo.model.entity.Problem;
 import com.lms.algo.repository.ProblemRepository;
 import org.springframework.stereotype.Service;
 

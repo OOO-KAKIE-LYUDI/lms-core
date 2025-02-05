@@ -1,6 +1,6 @@
 package com.lms.algo.controller;
 
-import com.lms.algo.entity.Problem;
+import com.lms.algo.model.entity.Problem;
 import com.lms.algo.service.ProblemService;
 import org.springframework.web.bind.annotation.*;
 

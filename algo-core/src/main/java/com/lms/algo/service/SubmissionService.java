@@ -1,6 +1,6 @@
 package com.lms.algo.service;
 
-import com.lms.algo.entity.Submission;
+import com.lms.algo.model.entity.Submission;
 import com.lms.algo.repository.SubmissionRepository;
 import org.springframework.stereotype.Service;
 

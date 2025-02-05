@@ -1,4 +1,4 @@
-package com.lms.algo.entity;
+package com.lms.algo.model.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

@@ -1,6 +1,6 @@
 package com.lms.algo.controller;
 
-import com.lms.algo.entity.Submission;
+import com.lms.algo.model.entity.Submission;
 import com.lms.algo.service.SubmissionService;
 import org.springframework.web.bind.annotation.*;
 
