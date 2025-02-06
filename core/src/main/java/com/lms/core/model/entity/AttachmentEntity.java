@@ -32,10 +32,10 @@ public class AttachmentEntity {
     @Column(name = "attachment_id")
     private Long attachmentId;
 
-    @Column(name = "course_id", updatable = false, insertable = false)
+    @Column(name = "course_id")
     private Long courseId;
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id", updatable = false, insertable = false)
     private CourseEntity course;
 
     @Column(name = "name")
@@ -47,10 +47,10 @@ public class AttachmentEntity {
     @Column(name = "url")
     private String url;
 
-    @Column(name = "file_id", updatable = false, insertable = false)
+    @Column(name = "file_id")
     private Long fileId;
     @ManyToOne
-    @JoinColumn(name = "file_id", referencedColumnName = "file_id")
+    @JoinColumn(name = "file_id", referencedColumnName = "file_id", updatable = false, insertable = false)
     private FileEntity file;
 
     @Column(name = "position")
@@ -61,7 +61,6 @@ public class AttachmentEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
 
     @PrePersist
     public void prePersist() {

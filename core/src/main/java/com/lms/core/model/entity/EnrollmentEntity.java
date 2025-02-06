@@ -39,10 +39,10 @@ public class EnrollmentEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserEntity user;
 
-    @Column(name = "course_id", updatable = false, insertable = false)
+    @Column(name = "course_id")
     private Long courseId;
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id", updatable = false, insertable = false)
     private CourseEntity course;
 
     @Column(name = "created_at")

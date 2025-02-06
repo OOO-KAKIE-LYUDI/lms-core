@@ -36,10 +36,10 @@ public class CourseEntity {
     @Column(name = "course_id")
     private Long courseId;
 
-    @Column(name = "creator_id", updatable = false, insertable = false)
+    @Column(name = "creator_id")
     private Long creatorId;
     @ManyToOne
-    @JoinColumn(name = "creator_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "creator_id", referencedColumnName = "user_id", updatable = false, insertable = false)
     private UserEntity creator;
 
     @Column(name = "title")
@@ -57,16 +57,16 @@ public class CourseEntity {
     @Column(name = "is_published")
     private Boolean isPublished;
 
-    @Column(name = "category_id", updatable = false, insertable = false)
+    @Column(name = "category_id")
     private Long categoryId;
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", updatable = false, insertable = false)
     private CategoryEntity categoryEntity;
 
-    @Column(name = "facility_id", updatable = false, insertable = false)
+    @Column(name = "facility_id")
     private Long facilityId = 1L;
     @ManyToOne
-    @JoinColumn(name = "facility_id", referencedColumnName = "facility_id")
+    @JoinColumn(name = "facility_id", referencedColumnName = "facility_id", updatable = false, insertable = false)
     private FacilityEntity facility;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)

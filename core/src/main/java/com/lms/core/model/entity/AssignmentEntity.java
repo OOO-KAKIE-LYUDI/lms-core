@@ -1,20 +1,7 @@
 package com.lms.core.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -24,13 +11,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "chapter", schema = "lms")
-public class ChapterEntity {
+@Table(name = "assignment", schema = "lms")
+public class AssignmentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chapter_id")
-    private Long chapterId;
+    @Column(name = "assignment_id")
+    private Long assignmentId;
 
     @Column(name = "course_id")
     private Long courseId;
@@ -44,18 +31,11 @@ public class ChapterEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "position")
-    private Integer position;
-
-    @Column(name = "isPublished")
-    private Boolean isPublished;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
 
     @PrePersist
     public void prePersist() {
