@@ -29,7 +29,7 @@ public class TestCaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "problem_id", nullable = false)
-    private ProblemEntity problemEntity;
+    private ProblemEntity problem;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String inputText;

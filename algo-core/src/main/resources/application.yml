@@ -20,6 +20,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+  config:
+    import: application-kafka.yml
 
 jwt:
   private:
@@ -53,3 +55,18 @@ cloud:
         secretKey: '****'
 
 allowed-origin: http://localhost:3000
+
+judge:
+  integrator:
+    feign:
+      max:
+        attempts: 3
+      delay:
+        ms: 3000
+      url: "http://localhost:2358/api"
+
+feature:
+  toggle:
+    code:
+      judge:
+        enabled: true
