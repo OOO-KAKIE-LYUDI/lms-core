@@ -32,7 +32,7 @@ public class SubmittedTestCaseServiceImpl implements SubmittedTestCaseService {
 
     @Override
     public List<SubmittedTestCaseEntity> createSubmittedTestCases(SubmissionEntity submission, List<TestCaseEntity> testCaseEntity) {
-        return null;
+        return testCaseEntity.stream().map(t -> createSubmittedTestCase(submission, t)).toList();
     }
 
     @Override

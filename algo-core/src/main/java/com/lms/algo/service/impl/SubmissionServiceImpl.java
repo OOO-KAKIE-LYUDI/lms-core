@@ -3,6 +3,7 @@ package com.lms.algo.service.impl;
 import com.lms.algo.model.dto.CreateSubmissionDto;
 import com.lms.algo.model.dto.GetSubmissionDto;
 import com.lms.algo.model.dto.ReceiveSubmittedTestCaseDto;
+import com.lms.algo.model.dto.SubmissionResult;
 import com.lms.algo.model.entity.SubmissionEntity;
 import com.lms.algo.model.enums.SubmissionStatusEnum;
 import com.lms.algo.model.enums.SubmittedTestCaseResultEnum;
@@ -13,6 +14,7 @@ import com.lms.algo.repository.SubmissionRepository;
 import com.lms.algo.repository.TestCaseRepository;
 import com.lms.algo.service.SubmissionService;
 import com.lms.algo.service.SubmittedTestCaseService;
+import com.lms.algo.service.WebSocketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,7 @@ public class SubmissionServiceImpl implements SubmissionService {
 
     private final TestCaseRepository testCaseRepository;
     private final SubmittedTestCaseService submittedTestCaseService;
+    private final WebSocketService webSocketService;
 
     @Override
     public List<SubmissionEntity> getAllSubmissions() {
@@ -62,6 +65,7 @@ public class SubmissionServiceImpl implements SubmissionService {
         var processedTestCases = submittedTestCases.stream()
                 .filter(s -> SubmittedTestCaseStatusEnum.DONE.equals(s.getStatus()))
                 .toList();
+
         if (!Objects.equals(processedTestCases.size(), submittedTestCases.size())) {
             return;
         }
@@ -73,5 +77,10 @@ public class SubmissionServiceImpl implements SubmissionService {
         }
 
         submissionRepository.save(submission);
+        var s = SubmissionResult.builder()
+                .submissionId(submission.getSubmissionId())
+                .result(submission.getStatus().name())
+                .build();
+        webSocketService.sendResultToWebSocket(submission.getUserId(), s);
     }
 }

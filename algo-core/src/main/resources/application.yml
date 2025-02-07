@@ -22,7 +22,24 @@ spring:
       ddl-auto: none
   config:
     import: application-kafka.yml
-
+  profiles:
+    include: kafka
+  kafka:
+    multiple:
+      codeJudgeProperties:
+        bootstrap-servers: ${lms.kafka.url:localhost:29092}
+        template.default-topic: "code-judge-results"
+        listener.concurrency: 1
+        consumer:
+          group-id: ${lms.core.group.id:lms-core-group}
+          auto-offset-reset: latest
+          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          spring:
+            json:
+              value:
+                default:
+                  type: "com.lms.algo.model.dto.ReceiveSubmittedTestCaseDto"
 jwt:
   private:
     key: classpath:/security/rsa.private.pem
@@ -63,10 +80,16 @@ judge:
         attempts: 3
       delay:
         ms: 3000
-      url: "http://localhost:2358/api"
+      url: http://localhost:2358/api
 
 feature:
   toggle:
     code:
       judge:
         enabled: true
+
+feign:
+  client.config.default:
+    readTimeout: 5000
+    connectTimeout: 5000
+    loggerLevel: FULL

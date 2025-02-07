@@ -56,20 +56,20 @@ CREATE TABLE IF NOT EXISTS lms.submission
     problem_id    BIGINT REFERENCES lms.problem (problem_id) ON DELETE CASCADE,
     language_id   BIGINT REFERENCES lms.language (language_id) ON DELETE CASCADE,
     code          TEXT      NOT NULL,
-    status        VARCHAR(20) CHECK (status IN ('pending', 'testing', 'completed', 'failed')) DEFAULT 'pending',
-    created_at    TIMESTAMP NOT NULL                                                          DEFAULT CURRENT_TIMESTAMP,
+    status        VARCHAR(20),
+    created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS lms.submitted_test_case
 (
     submitted_test_case_id BIGSERIAL PRIMARY KEY,
-    submission_id BIGINT REFERENCES lms.submission ON DELETE CASCADE,
-    test_case_id BIGINT REFERENCES lms.test_case ON DELETE CASCADE,
-    judge_integrator_id BIGINT,
-    status VARCHAR(20) CHECK (status IN ('WAIT', 'DONE')),
-    result VARCHAR(20) CHECK (result IN ('FAIL', 'PASS')),
-    result_message VARCHAR(1024)
+    submission_id          BIGINT REFERENCES lms.submission ON DELETE CASCADE,
+    test_case_id           BIGINT REFERENCES lms.test_case ON DELETE CASCADE,
+    judge_integrator_id    BIGINT,
+    status                 VARCHAR(20) CHECK (status IN ('WAIT', 'DONE')),
+    result                 VARCHAR(20) CHECK (result IN ('FAIL', 'PASS')),
+    result_message         VARCHAR(1024)
 );
 
 -- Таблица для хранения результатов тестов
@@ -98,4 +98,5 @@ ALTER TABLE lms.problem
     ADD COLUMN likes      INT          NOT NULL DEFAULT 0,
     ADD COLUMN dislikes   INT          NOT NULL DEFAULT 0,
     ADD COLUMN video_id   VARCHAR(255) NULL,
+    ADD COLUMN link       VARCHAR(255) NULL,
     ADD COLUMN "order"    INTEGER      NULL;

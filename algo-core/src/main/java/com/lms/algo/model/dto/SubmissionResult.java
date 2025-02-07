@@ -10,6 +10,6 @@ import lombok.*;
 public class SubmissionResult {
     private String result;  // PASS, FAIL
     private String errorMessage;
-    private Long testCaseId;
+    private Long submissionId;
     private String time;
 }

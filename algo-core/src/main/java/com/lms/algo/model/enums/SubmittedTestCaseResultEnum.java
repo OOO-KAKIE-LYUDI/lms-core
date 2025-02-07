@@ -13,12 +13,13 @@ public enum SubmittedTestCaseResultEnum {
             SubmittedTestCaseExternalResultEnum.Failed, SubmittedTestCaseExternalResultEnum.RuntimeException,
             SubmittedTestCaseExternalResultEnum.InternalException, SubmittedTestCaseExternalResultEnum.FormatException,
             SubmittedTestCaseExternalResultEnum.OtherException
-    )),
+    ), "FAIL"),
     PASS(List.of (
             SubmittedTestCaseExternalResultEnum.Ok
-    ));
+    ), "PASS");
 
     private final List<SubmittedTestCaseExternalResultEnum> externalResultCodesMapping;
+    private final String result;
 
     public static SubmittedTestCaseResultEnum getByExternalValue(SubmittedTestCaseExternalResultEnum externalValue) {
         return Arrays.stream(SubmittedTestCaseResultEnum.values())

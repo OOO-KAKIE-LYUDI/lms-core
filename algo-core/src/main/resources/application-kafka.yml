@@ -2,9 +2,9 @@ spring:
   kafka:
     multiple:
       codeJudgeProperties:
-        bootstrap-servers: ${lms.kafka.url}
+        bootstrap-servers: ${lms.kafka.url:localhost:29092}
         template.default-topic: "code-judge-results"
-        listener.concurrency: 10
+        listener.concurrency: 1
         consumer:
           group-id: ${lms.core.group.id:lms-core-group}
           auto-offset-reset: latest

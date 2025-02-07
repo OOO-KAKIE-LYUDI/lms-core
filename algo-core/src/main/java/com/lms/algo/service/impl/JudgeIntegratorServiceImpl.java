@@ -5,6 +5,7 @@ import com.lms.algo.model.entity.SubmittedTestCaseEntity;
 import com.lms.algo.model.mapper.SubmittedTestCaseMapper;
 import com.lms.algo.service.JudgeIntegratorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.concurrent.Executors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class JudgeIntegratorServiceImpl implements JudgeIntegratorService {
 
     private final static Integer NUMBER_OF_THREADS = 10;
@@ -25,8 +27,11 @@ public class JudgeIntegratorServiceImpl implements JudgeIntegratorService {
     @Override
     public void sendToJudgeIntegrator(SubmittedTestCaseEntity submittedTestCase) {
         fixedThreadPool.submit(
-                () -> judgeIntegratorFeignClient.sendSubmission(
-                        submittedTestCaseMapper.toSendSubmissionDto(submittedTestCase)));
+                () -> {
+//                    judgeIntegratorFeignClient.sendSubmission(
+//                            submittedTestCaseMapper.toSendSubmissionDto(submittedTestCase));
+                    log.info("Sent submission");
+                });
     }
 
     @Override

@@ -36,6 +36,9 @@ dependencies {
     implementation 'io.zipkin.brave:brave-instrumentation-http'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
     implementation 'io.zipkin.reporter2:zipkin-sender-okhttp3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.1'
+    implementation 'org.springframework:spring-websocket'
+    implementation 'org.springframework.kafka:spring-kafka'
 }
 
 tasks.register('prepareKotlinBuildScriptModel') {

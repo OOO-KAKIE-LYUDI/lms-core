@@ -27,7 +27,6 @@ public interface ProblemMapper {
     List<ExampleDto> toExampleDtoList(List<ExampleEntity> entities);
 
     @Mapping(source = "problemId", target = "id")
-    @Mapping(target = "link", ignore = true)
     ProblemSummaryDto toSummaryDto(ProblemEntity entity);
 
     List<ProblemSummaryDto> toSummaryDtoList(List<ProblemEntity> entities);

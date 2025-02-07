@@ -24,13 +24,13 @@ public interface SubmittedTestCaseMapper {
     @Mapping(target = "submissionId", source = "source.submittedTestCaseId")
     @Mapping(target = "language", source = "source.submission.language.judgeCode")
     @Mapping(target = "sourceCode", source = "source.submission.code")
-    @Mapping(target = "testArguments", source = "testCase.testCase.inputText")
-    @Mapping(target = "testResults", source = "testCase.testCase.outputText")
+    @Mapping(target = "testArguments", source = "source.testCase.inputText")
+    @Mapping(target = "testResults", source = "source.testCase.outputText")
     SendSubmissionDto toSendSubmissionDto(SubmittedTestCaseEntity source);
 
     @Mapping(target = "submittedTestCaseEntity.result", expression = "java(SubmittedTestCaseResultEnum.getByExternalValue(SubmittedTestCaseResultEnum.SubmittedTestCaseExternalResultEnum.getByValue(receiveSubmittedTestCaseDto.getResult())))")
     @Mapping(target = "submittedTestCaseEntity.status", expression = "java(SubmittedTestCaseStatusEnum.DONE)")
     @Mapping(target = "submittedTestCaseEntity.resultMessage", source = "receiveSubmittedTestCaseDto.resultMessage")
-    @Mapping(target = "submittedTestCaseEntity.codeJudgeId", source = "receiveSubmittedTestCaseDto.codeJudgeId")
+    @Mapping(target = "submittedTestCaseEntity.judgeIntegratorId", source = "receiveSubmittedTestCaseDto.codeJudgeId")
     void update(@MappingTarget SubmittedTestCaseEntity submittedTestCaseEntity, ReceiveSubmittedTestCaseDto receiveSubmittedTestCaseDto);
 }

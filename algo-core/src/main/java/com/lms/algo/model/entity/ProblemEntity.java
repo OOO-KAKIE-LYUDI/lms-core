@@ -47,6 +47,9 @@ public class ProblemEntity {
     @Column(name ="`order`")
     private Integer order;
 
+    @Column(name ="link")
+    private String link;
+
     @Column
     private String videoId;
 
