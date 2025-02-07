@@ -20,11 +20,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
-  liquibase:
-    enabled: true
-    user: postgres
-    password: 1qaz2wsx
-    change-log: classpath:db/changelog/Changelog.xml
+  config:
+    import: application-kafka.yml
+  profiles:
+    include: kafka
   kafka:
     multiple:
       codeJudgeProperties:
@@ -41,7 +40,6 @@ spring:
               value:
                 default:
                   type: "com.lms.algo.model.dto.ReceiveSubmittedTestCaseDto"
-
 jwt:
   private:
     key: classpath:/security/rsa.private.pem
@@ -75,12 +73,6 @@ cloud:
 
 allowed-origin: http://localhost:3000
 
-feign:
-  client.config.default:
-    readTimeout: 5000
-    connectTimeout: 5000
-    loggerLevel: FULL
-
 judge:
   integrator:
     feign:
@@ -89,3 +81,15 @@ judge:
       delay:
         ms: 3000
       url: http://localhost:2358/api
+
+feature:
+  toggle:
+    code:
+      judge:
+        enabled: true
+
+feign:
+  client.config.default:
+    readTimeout: 5000
+    connectTimeout: 5000
+    loggerLevel: FULL

@@ -17,6 +17,7 @@ repositories {
 dependencies {
     implementation project(':auth')
     implementation project(':file')
+    implementation project(':algo-core')
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
@@ -35,6 +36,9 @@ dependencies {
     implementation 'io.zipkin.brave:brave-instrumentation-http'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
     implementation 'io.zipkin.reporter2:zipkin-sender-okhttp3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.1'
+    implementation 'org.springframework:spring-websocket'
+    implementation 'org.springframework.kafka:spring-kafka'
 }
 
 tasks.register('prepareKotlinBuildScriptModel') {

@@ -1,5 +1,3 @@
-CREATE SCHEMA IF NOT EXISTS lms;
-
 CREATE TABLE IF NOT EXISTS lms.facility
 (
     facility_id BIGSERIAL PRIMARY KEY,

@@ -1,0 +1,61 @@
+plugins {
+    id 'org.springframework.boot' version '3.0.4'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'java'
+}
+
+dependencies {
+    // Spring Boot Starter Web - для REST API
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Boot Starter Data JPA - для работы с PostgreSQL
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation project(path: ':auth')
+
+    // PostgreSQL драйвер
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Liquibase для миграций базы данных
+    implementation 'org.liquibase:liquibase-core'
+
+    // Spring Boot Starter WebSocket - для WebSocket API
+//    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    // Spring Kafka - для работы с Kafka
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // Jackson - для сериализации сообщений WebSocket и Kafka
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    // Lombok - упрощение кода
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // MapStruct - для маппинга DTO
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    // Spring Boot Starter Validation - для валидации данных
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.1'
+
+    implementation 'org.springframework:spring-websocket'
+
+    // Тестирование
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

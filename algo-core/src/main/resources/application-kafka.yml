@@ -1,0 +1,17 @@
+spring:
+  kafka:
+    multiple:
+      codeJudgeProperties:
+        bootstrap-servers: ${lms.kafka.url:localhost:29092}
+        template.default-topic: "code-judge-results"
+        listener.concurrency: 1
+        consumer:
+          group-id: ${lms.core.group.id:lms-core-group}
+          auto-offset-reset: latest
+          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          spring:
+            json:
+              value:
+                default:
+                  type: "com.lms.algo.model.dto.ReceiveSubmittedTestCaseDto"

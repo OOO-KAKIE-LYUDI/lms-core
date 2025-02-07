@@ -19,7 +19,7 @@ import java.nio.file.Path;
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
 
-    private final S3Client s3Client;
+//    private final S3Client s3Client;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
@@ -34,7 +34,7 @@ public class FileServiceImpl implements FileService {
                 .key(key)
                 .build();
 
-        s3Client.putObject(putObjectRequest, RequestBody.fromFile(tempFile));
+//        s3Client.putObject(putObjectRequest, RequestBody.fromFile(tempFile));
 
         Files.delete(tempFile);
 
@@ -46,7 +46,7 @@ public class FileServiceImpl implements FileService {
                 .bucket(bucketName)
                 .key(key)
                 .build();
-
-        return s3Client.getObject(getObjectRequest, ResponseTransformer.toBytes()).asByteArray();
+        return null;
+//        return s3Client.getObject(getObjectRequest, ResponseTransformer.toBytes()).asByteArray();
     }
 }

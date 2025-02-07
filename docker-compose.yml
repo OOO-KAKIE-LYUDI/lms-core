@@ -1,4 +1,5 @@
-version: "3.1"
+version: '3.8'
+
 services:
 
   postgresdb:
@@ -7,9 +8,11 @@ services:
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_DB: lmsdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1qaz2wsx
+      POSTGRES_DB: lmsdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   zipkin:
     image: openzipkin/zipkin:2.23.2
@@ -19,3 +22,56 @@ services:
     environment:
       - STORAGE_TYPE=mem
       - ZIPKIN_UI_BANNER=Welcome to Zipkin!
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+
+  # Kafka. Bootsrap: localhost:29092
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # UI for Apache Kafka (https://github.com/provectus/kafka-ui): http://localhost:8090/
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    depends_on:
+      - kafka
+    ports:
+      - 8090:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: true
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    # volumes:
+    #   - ./kafka-ui/dynamic_config.yml:/etc/kafkaui/dynamic_config.yaml
+
+  core:
+    build: .
+    container_name: core
+    depends_on:
+      - postgresdb
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/lmsdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1qaz2wsx
+    ports:
+      - "8088:8088"
+
+volumes:
+  postgres_data:
